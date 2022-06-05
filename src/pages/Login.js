@@ -5,6 +5,9 @@ import PropTypes from 'prop-types';
 import CreateInput from '../components/CreateInput';
 import CreateButton from '../components/CreateButton';
 import { getTokenThunk, setPlayer } from '../redux/action';
+import styles from '../styles/Login.module.scss';
+import settingSVG from '../assets/svg/settings.svg';
+import Logo from '../components/Logo';
 
 class Login extends Component {
   constructor(props) {
@@ -47,11 +50,11 @@ class Login extends Component {
     const { userName, userEmail, isDisable } = this.state;
 
     return (
-      <div>
-
-        <h1>Login</h1>
-        <form>
+      <div className={ styles.div_container }>
+        <Logo />
+        <form className={ styles.form_container }>
           <CreateInput
+            className={ styles.login_input }
             placeholder="User"
             testID="input-player-name"
             name="userName"
@@ -60,6 +63,7 @@ class Login extends Component {
           />
 
           <CreateInput
+            className={ styles.login_input }
             placeholder="E-mail"
             testID="input-gravatar-email"
             name="userEmail"
@@ -68,6 +72,7 @@ class Login extends Component {
           />
 
           <CreateButton
+            className={ styles.login_button }
             placeholder="Play"
             testID="btn-play"
             isDisable={ isDisable }
@@ -76,7 +81,16 @@ class Login extends Component {
 
         </form>
         <Link to="/settings" data-testid="btn-settings">
-          <button type="button">Settings</button>
+          <button
+            type="button"
+            className={ styles.settings_button }
+          >
+            <img
+              className={ styles.settings }
+              src={ settingSVG }
+              alt="engrenagem de settings"
+            />
+          </button>
         </Link>
       </div>
     );
