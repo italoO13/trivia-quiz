@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import CreateInput from '../components/CreateInput';
 import CreateButton from '../components/CreateButton';
-// import { addToken } from '../services/localStore';
 import { getTokenThunk, setPlayer } from '../redux/action';
 
 class Login extends Component {

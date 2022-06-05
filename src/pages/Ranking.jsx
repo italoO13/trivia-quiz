@@ -1,18 +1,25 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import CreateButton from '../components/CreateButton';
-import { readRanking } from '../services/localStore';
+import { readDb } from '../services/firebase';
 
 class Ranking extends Component {
   state ={
     ranking: [],
+    isloading: false,
   }
 
   componentDidMount() {
-    const dadosRanking = readRanking();
-    dadosRanking.sort(this.ordemScore);
     this.setState({
-      ranking: dadosRanking });
+      isloading: true,
+    }, async () => {
+      const dadosRanking = await readDb();
+      dadosRanking.sort(this.ordemScore);
+      this.setState({
+        ranking: dadosRanking,
+        isloading: false,
+      });
+    });
   }
 
   ordemScore = (a, b) => {
@@ -34,11 +41,13 @@ class Ranking extends Component {
 
   render() {
     const { history } = this.props;
-    const { ranking } = this.state;
+    const { ranking, isloading } = this.state;
     return (
       <section>
         <h1 data-testid="ranking-title">Ranking</h1>
-        {ranking.map(this.renderRanking)}
+        {!isloading
+          ? ranking.map(this.renderRanking)
+          : <h1>Carregando...</h1>}
         <CreateButton
           placeholder="Home page"
           testID="btn-go-home"

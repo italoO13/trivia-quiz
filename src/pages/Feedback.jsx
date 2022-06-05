@@ -4,8 +4,14 @@ import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import CreateButton from '../components/CreateButton';
 import { resetUserAction } from '../redux/action';
+import { addDb } from '../services/firebase';
 
 class Feedback extends Component {
+  componentDidMount() {
+    const { score, name, picture } = this.props;
+    addDb(name, picture, score);
+  }
+
   render() {
     const { score, assertions, history, reset } = this.props;
     const assertionsComp = 3;
@@ -49,9 +55,11 @@ class Feedback extends Component {
   }
 }
 
-const mapStateToProps = ({ player: { score, assertions } }) => ({
+const mapStateToProps = ({ player: { score, assertions, name, picture } }) => ({
   score,
   assertions,
+  name,
+  picture,
 });
 
 const mapDispatchToProps = (Dispatch) => ({
