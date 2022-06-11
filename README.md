@@ -43,7 +43,7 @@ Foi utilizado o kanban como metodologia de projetos a partir do trello e o slack
 
 ### Web
 
-  <img alt="review web" src="./src/imgs/Mobile.png">
+  <img alt="review web" src="./src/imgs/Desktop.png">
 
 ### Mobile
     
